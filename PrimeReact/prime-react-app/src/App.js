@@ -3,19 +3,30 @@ import './App.css';
 
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast'
 
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
  
 
 function App() {
   const [text, setText] = useState('');
+  const toastRef = useRef();
+
+  const onButtonClick = () => {
+    if (text) {
+      toastRef.current.show({severity: 'success', summary: 'Success', detail: text})
+    } else {
+      toastRef.current.show({severity: 'error', summary: 'Error', detail: 'Value is required'})
+    }
+  }
 
   return (
     <div className="App">
+      <Toast ref={toastRef} />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         
@@ -24,7 +35,7 @@ function App() {
 
         <br /><br />
 
-        <Button type='button' label='Submit' icon='pi pi-check'></Button>
+        <Button type='button' label='Submit' icon='pi pi-check' onClick={onButtonClick}></Button>
       </header>
     </div>
   );
