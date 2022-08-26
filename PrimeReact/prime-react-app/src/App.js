@@ -1,45 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-import { Toast } from 'primereact/toast'
+import './App.css';
 
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
+import "primeflex/primeflex.css";                                  //primeflex
 
-import { useRef, useState } from 'react';
- 
+import { BreadCrumb } from "primereact/breadcrumb";
+import { Button } from "primereact/button";
 
-function App() {
-  const [text, setText] = useState('');
-  const toastRef = useRef();
+function App({ props }) {
+  const items = [
+      { label: "Computer" },
+      { label: "Notebook" },
+      { label: "Accessories" },
+      { label: "Backpacks" },
+      { label: "Item" },
+  ];
 
-  const onButtonClick = () => {
-    if (text) {
-      toastRef.current.show({severity: 'success', summary: 'Success', detail: text})
-    } else {
-      toastRef.current.show({severity: 'error', summary: 'Error', detail: 'Value is required'})
-    }
-  }
+  const home = {
+      icon: "pi pi-home",
+      url: "https://www.primefaces.org/primereact/showcase",
+  };
 
   return (
-    <div className="App">
-      <Toast ref={toastRef} />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        
-        <span className='p-float-label'>
-          <InputText value={text} onChange={e => setText(e.target.value)} />
-          <label htmlFor='input_txt' className='p-component'>Name</label> 
-        </span>
-
-        <br />
-
-        <Button type='button' label='Submit' icon='pi pi-check' onClick={onButtonClick}></Button>
-      </header>
-    </div>
+      <div className="App">
+          <div class="topbar shadow-2">
+              <div className="card">
+                  <BreadCrumb model={items} home={home} />
+              </div>
+          </div>
+          <h5>Raised Buttons</h5>
+          <Button label="Primary" className="p-button-raised" />
+          <Button
+              label="Secondary"
+              className="p-button-raised p-button-secondary"
+          />
+          <Button
+              label="Success"
+              className="p-button-raised p-button-success"
+          />
+          <Button label="Info" className="p-button-raised p-button-info" />
+          <Button
+              label="Warning"
+              className="p-button-raised p-button-warning"
+          />
+          <Button label="Help" className="p-button-raised p-button-help" />
+          <Button label="Danger" className="p-button-raised p-button-danger" />
+      </div>
   );
 }
 
