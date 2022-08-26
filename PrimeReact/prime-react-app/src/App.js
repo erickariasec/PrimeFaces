@@ -30,10 +30,12 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         
-        <InputText value={text} onChange={e => setText(e.target.value)} />
-        { text }
+        <span className='p-float-label'>
+          <InputText value={text} onChange={e => setText(e.target.value)} />
+          <label htmlFor='input_txt' className='p-component'>Name</label> 
+        </span>
 
-        <br /><br />
+        <br />
 
         <Button type='button' label='Submit' icon='pi pi-check' onClick={onButtonClick}></Button>
       </header>
